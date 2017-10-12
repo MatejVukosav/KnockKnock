@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "660245173692",
+    "firebase_url": "https://knockknock-6b044.firebaseio.com",
+    "project_id": "knockknock-6b044",
+    "storage_bucket": "knockknock-6b044.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:660245173692:android:14a6102b84534acf",
+        "android_client_info": {
+          "package_name": "com.things.android.vuki.knockknock"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "660245173692-klk4dgjdihsbm4vl2tfjiat4hjvu6sis.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBW-8zBBSzltuBz4tzCSqqrkmeKcmMrcAs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
