@@ -123,6 +123,5 @@ public class MainActivity extends AppCompatActivity {
         Map<String, Object> update = new HashMap<>();
         update.put( "isAccepted", isApproved );
         databaseReference.updateChildren( update );
-
     }
 }

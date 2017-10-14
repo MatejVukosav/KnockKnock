@@ -122,7 +122,7 @@ public class MainActivity extends Activity implements ImageReader.OnImageAvailab
         } );
 
         if ( databaseReference != null ) {
-            GuestEntity guestEntity = new GuestEntity( new Date(  ).getTime(), Base64.encodeToString( imageBytes, Base64.NO_WRAP | Base64.URL_SAFE ) );
+            GuestEntity guestEntity = new GuestEntity( new Date().getTime(), Base64.encodeToString( imageBytes, Base64.NO_WRAP | Base64.URL_SAFE ) );
             databaseReference.setValue( guestEntity );
         }
 
