@@ -8,6 +8,7 @@ import android.media.ImageReader;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.support.v4.content.ContextCompat;
 import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -15,8 +16,11 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.google.android.things.contrib.driver.button.Button;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.things.android.vuki.knockknock.camera.Camera;
 import com.things.android.vuki.knockknock.camera.CameraActions;
 
@@ -69,6 +73,28 @@ public class MainActivity extends Activity implements ImageReader.OnImageAvailab
         cameraActions.initializeCamera( this, cameraHandler, this );
 
         setupButton();
+
+        ValueEventListener scanListener = new ValueEventListener() {
+            @Override
+            public void onDataChange( DataSnapshot dataSnapshot ) {
+                GuestEntity model = dataSnapshot.getValue( GuestEntity.class );
+                if ( model != null ) {
+                    ImageView result = findViewById( R.id.result );
+                    if ( model.isAccepted ) {
+                        result.setImageDrawable( ContextCompat.getDrawable( getApplicationContext(), android.R.drawable.btn_plus ) );
+                    } else {
+                        result.setImageDrawable( ContextCompat.getDrawable( getApplicationContext(), android.R.drawable.btn_minus ) );
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled( DatabaseError databaseError ) {
+                Log.w( TAG, "Failed to read value.", databaseError.toException() );
+            }
+        };
+
+        databaseReference.addValueEventListener( scanListener );
     }
 
     @Override
@@ -147,44 +173,10 @@ public class MainActivity extends Activity implements ImageReader.OnImageAvailab
         } );
 
         if ( databaseReference != null ) {
-//            String key = databaseReference.child( "messages" ).push().getKey();
-//            Map<String, Object> guestValue = new HashMap<>();
-//            guestValue.put( key, guestEntity );
-//            databaseReference.updateChildren( guestValue );
-
             long timestamp = System.currentTimeMillis() / 1000;
-            GuestEntity guestEntity = null;
-            guestEntity = new GuestEntity( timestamp, Base64.encodeToString( imageBytes, Base64.NO_WRAP | Base64.URL_SAFE ) );
-
+            GuestEntity guestEntity = new GuestEntity( timestamp, Base64.encodeToString( imageBytes, Base64.NO_WRAP | Base64.URL_SAFE ) );
             databaseReference.setValue( guestEntity );
-
-//            databaseReference.child( "messages" ).setValue( guestEntity );
-
         }
-//
-//        if ( imageBytes != null ) {
-//            final DatabaseReference log = mDatabase.getReference( "logs" ).push();
-//            String imageStr = Base64.encodeToString( imageBytes, Base64.NO_WRAP | Base64.URL_SAFE );
-//            // upload image to firebase
-//            log.child( "timestamp" ).setValue( ServerValue.TIMESTAMP );
-//            log.child( "image" ).setValue( imageStr );
-//
-//            cloudHandler.post( new Runnable() {
-//                @Override
-//                public void run() {
-//                    Log.d( TAG, "sending image to cloud vision" );
-//                    // annotate image by uploading to Cloud Vision API
-//                    try {
-//                        Map<String, Float> annotations = CloudVisionUtils.annotateImage( imageBytes );
-//                        Log.d( TAG, "cloud vision annotations:" + annotations );
-//                        if ( annotations != null ) {
-//                            log.child( "annotations" ).setValue( annotations );
-//                        }
-//                    } catch ( IOException e ) {
-//                        Log.e( TAG, "Cloud Vison API error: ", e );
-//                    }
-//                }
-//            } );
-//        }
+
     }
 }

@@ -14,4 +14,7 @@ public class GuestEntity {
         this.image = image;
         this.isAccepted = false;
     }
+
+    public GuestEntity() {
+    }
 }
