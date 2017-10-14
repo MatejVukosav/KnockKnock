@@ -130,6 +130,7 @@ public class Camera implements CameraActions {
         } catch ( CameraAccessException cae ) {
             Log.d( TAG, "access exception while preparing pic", cae );
         }
+
     }
 
     /**
@@ -157,6 +158,7 @@ public class Camera implements CameraActions {
     /**
      * Execute a new capture request within the active session
      */
+
     private void triggerImageCapture() {
         try {
             final CaptureRequest.Builder captureBuilder =

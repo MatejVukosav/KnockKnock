@@ -7,12 +7,12 @@ public class GuestEntity {
 
     Long timestamp;
     String image;
-    boolean isAccepted;
+    Boolean isAccepted;
 
     public GuestEntity( Long timestamp, String image ) {
         this.timestamp = timestamp;
         this.image = image;
-        this.isAccepted = false;
+        this.isAccepted = null;
     }
 
     public GuestEntity() {
