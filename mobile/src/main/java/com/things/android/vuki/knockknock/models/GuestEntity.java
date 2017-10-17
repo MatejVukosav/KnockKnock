@@ -5,10 +5,10 @@ package com.things.android.vuki.knockknock.models;
  */
 public class GuestEntity {
 
-    private Long timestamp;
-    private String image;
+    public Long timestamp;
+    public String image;
     //Can't parse if private
-    Boolean isAccepted;
+    public Boolean isAccepted;
 
     @SuppressWarnings("unused")
     public GuestEntity( Long timestamp, String image, Boolean isAccepted ) {

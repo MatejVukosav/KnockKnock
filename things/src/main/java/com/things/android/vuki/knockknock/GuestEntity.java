@@ -5,9 +5,9 @@ package com.things.android.vuki.knockknock;
  */
 public class GuestEntity {
 
-    Long timestamp;
-    String image;
-    Boolean isAccepted;
+    public Long timestamp;
+    public String image;
+    public Boolean isAccepted;
 
     public GuestEntity( Long timestamp, String image ) {
         this.timestamp = timestamp;
